@@ -1,15 +1,26 @@
-
-
 //html template
 
-const content = document.getElementById( 'contents' );
+const content = document.getElementById("contents");
 
-cards.map( card =>
-{
-  const newDiv = document.createElement( 'div' );
-  newDiv.id = 'new-div'
-  const { id,image,star,title,subject,grade,add,unit,lessons,topics,tutor,students,date } = card;
- 
+cards.map((card) => {
+  const newDiv = document.createElement("div");
+  newDiv.id = "new-div";
+  const {
+    id,
+    image,
+    star,
+    title,
+    subject,
+    grade,
+    add,
+    unit,
+    lessons,
+    topics,
+    tutor,
+    students,
+    date,
+  } = card;
+
   newDiv.innerHTML = `
   <div class="card one">
   <div class="expired" id = ${id}>
@@ -20,8 +31,9 @@ cards.map( card =>
  </div>
  <div class="cardright">
   <main>
-    <div class="head star">
- <h4>${title}</h4>
+    <div  ${id == "one" ? 'class = "title head star"' : 'class="head star"'}>
+    
+ <h4 >${title}</h4>
  <img  class="starlogo" src='${star}' alt ='star'>
  </div>
  
@@ -32,15 +44,19 @@ cards.map( card =>
   <p>${grade}  + <b style="color: green;">${add}</b></p>
  </div>
  
- <div class="head-3">
-  <p><strong>${unit}</strong> Units</p>
-  <p><strong>${lessons}</strong> Lessons</p>
-  <p><strong>${topics}</strong> Topics</p>
- </div>
+ ${
+   unit
+     ? `<div class="head-3">
+ <p><strong>${unit}</strong> Units</p>
+ <p><strong>${lessons}</strong> Lessons</p>
+ <p><strong>${topics}</strong> Topics</p>
+</div>`
+     : ""
+ }
  
  <div class="head-arrow">
   <div class="arrow-line">
-  <p>${tutor}</p>
+  <p ${id == "two" ? `class = "disabled"` : ""}>${tutor}</p>
   <img   src="./icons/arrow-down.svg" alt="arrow-down">
  </div>
  </div>
@@ -55,40 +71,22 @@ cards.map( card =>
  <hr class="card-line">
  <div class="card-footer">
   <img src="./icons/preview.svg" alt="preview">
-  <img src="./icons/manage course.svg" alt="manage">
-  <img src="./icons/grade submissions.svg" alt = "grade">
-  <img src="./icons/reports.svg" alt="reports">
+  <img  ${
+    date ? "" : 'class = "disabled"'
+  }  src="./icons/manage course.svg" alt="manage">
+  <img   ${
+    date ? "" : 'class = "disabled"'
+  }  src="./icons/grade submissions.svg" alt = "grade">
+  <img   src="./icons/reports.svg" alt="reports">
  </div>
  
   </div>`;
-  
-   content.appendChild( newDiv );
-   if ( id == 'four' )
-   {
-     const expired = document.getElementById( `${id}` );
-     const paragrah = document.createElement( 'p' );
-     paragrah.innerHTML = `<p style="font-size: 12px;">EXPIRED</p>`
-     expired.appendChild(paragrah)
-      }
- 
- 
- 
- 
 
-
-} )
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  content.appendChild(newDiv);
+  if (id == "four") {
+    const expired = document.getElementById(`${id}`);
+    const paragrah = document.createElement("p");
+    paragrah.innerHTML = `<p style="font-size: 12px;">EXPIRED</p>`;
+    expired.appendChild(paragrah);
+  }
+});
